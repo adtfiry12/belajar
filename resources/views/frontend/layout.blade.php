@@ -14,13 +14,13 @@
         </div>
         <ul class="flex space-x-8 font-medium text-gray-50">
             <li><a href="{{ route('dashboard') }}" class="hover:text-gray-400 transition">Home</a></li>
-            <li><a href="{{ route('dashboard') }}" class="hover:text-gray-400 transition">Project</a></li>
-            <li><a href="{{ route('dashboard') }}" class="hover:text-gray-400 transition">About</a></li>
-            <li><a href="{{ route('dashboard') }}" class="hover:text-gray-400 transition">Contact</a></li>
+            <li><a href="{{ route('project') }}" class="hover:text-gray-400 transition">Project</a></li>
+            <li><a href="{{ route('about') }}" class="hover:text-gray-400 transition">About</a></li>
+            <li><a href="{{ route('contact') }}" class="hover:text-gray-400 transition">Contact</a></li>
         </ul>
     </nav>
 
-    <main class="pt-20 bg-gray-100 max-w-6xl mx-auto">
+    <main class="pt-16.5 bg-gray-100 max-w-6xl mx-auto">
         @yield('content')
     </main>
 
