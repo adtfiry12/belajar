@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class frondEndController extends Controller
 {
     public function index(){
-        return view('frontend.layout');
+        return view('frontend.dashboard');
     }
 }
