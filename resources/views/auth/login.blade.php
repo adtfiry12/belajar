@@ -47,7 +47,7 @@
 
             <button type="submit" 
                 class="bg-slate-950 text-white text-[11px] font-black uppercase tracking-widest px-8 py-3 border-2 border-slate-950 hover:bg-blue-600 hover:border-blue-600 transition-all shadow-[4px_4px_0px_0px_rgba(37,99,235,1)] active:translate-x-1 active:translate-y-1 active:shadow-none">
-                {{ __('Initialize Access') }}
+                {{ __('Login') }}
             </button>
         </div>
     </form>

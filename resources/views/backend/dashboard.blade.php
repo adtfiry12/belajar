@@ -1,4 +1,5 @@
 <x-app-layout>
+    <x-slot name="title">Dashboard</x-slot>
     <x-slot name="header">
         <h2 class="font-black text-xl text-slate-900 uppercase tracking-tight">
             {{ __('Dashboard') }}
