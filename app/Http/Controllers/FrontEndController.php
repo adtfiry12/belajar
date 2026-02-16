@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class frondEndController extends Controller
+class FrontEndController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
         return view('frontend.dashboard');
     }
 

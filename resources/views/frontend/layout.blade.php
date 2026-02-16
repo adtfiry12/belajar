@@ -13,7 +13,7 @@
             ADT <span class="text-gray-800">CODE.</span>
         </div>
         <ul class="flex space-x-8 font-medium text-gray-50">
-            <li><a href="{{ route('dashboard') }}" class="hover:text-gray-400 transition">Home</a></li>
+            <li><a href="{{ route('home') }}" class="hover:text-gray-400 transition">Home</a></li>
             <li><a href="{{ route('project') }}" class="hover:text-gray-400 transition">Project</a></li>
             <li><a href="{{ route('about') }}" class="hover:text-gray-400 transition">About</a></li>
             <li><a href="{{ route('contact') }}" class="hover:text-gray-400 transition">Contact</a></li>
