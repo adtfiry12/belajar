@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -21,7 +22,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.projects.create');
     }
 
     /**
@@ -29,7 +30,23 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'desc' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('projects', 'public');
+        }
+
+        Project::create([
+            'title' => $request->title,
+            'desc' => $request->desc,
+            'image' => $imagePath
+        ]);
+
+        return redirect()->route('admin.project.index')->with('success', 'Project Berhasih Di upload!');
     }
 
     /**
@@ -45,7 +62,8 @@ class ProjectController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $project = Project::find($id);
+        return view('backend.projects.edit', compact('project'));
     }
 
     /**
@@ -53,7 +71,24 @@ class ProjectController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $project = Project::find($id);
+
+        $request->validate([
+        'title' => 'required',
+        'desc'  => 'required',
+        'image' => 'nullable|image|max:2048',
+        ]);
+
+        if ($request->hasFile('image')) {
+            if ($project->image) {
+            Storage::disk('public')->delete($project->image);
+            }
+            $data['image'] = $request->file('image')->store('slides', 'public');
+
+            $project->update($data);
+        }
+
+        return redirect()->route('admin.project.index')->with('success', 'Project Berhasih Di Ubah!');
     }
 
     /**
@@ -61,6 +96,14 @@ class ProjectController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $project = Project::find($id);
+
+        if($project->image){
+            Storage::disk('public')->delete($project->image);
+        }
+
+        $project->delete();
+
+        return redirect()->route('admin.project.index')->with('success', 'DATA BERHASIL DI HAPUS');
     }
 }

@@ -3,7 +3,7 @@
            class="fixed inset-y-0 left-0 z-50 w-64 bg-slate-950 text-slate-400 transition-transform duration-300 transform lg:translate-x-0 lg:static lg:inset-0 border-r border-slate-800">
         
         <div class="flex items-center justify-center h-16 border-b border-slate-800 bg-slate-950 px-4">
-            <a href="{{ route('dashboard') }}" class="flex items-center space-x-3">
+            <a href="{{ route('admin.dashboard') }}" class="flex items-center space-x-3">
                 <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
                 </svg>
@@ -12,32 +12,32 @@
         </div>
 
         <nav class="mt-4 px-0 space-y-0.5">
-            <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+            <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('dashboard')">
                 <svg class="w-4 h-4 me-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
                     {{ __('Dashboard') }}
             </x-nav-link>
 
-            <x-nav-link :href="route('admin.slide')" :active="request()->routeIs('admin.slide')">
+            <x-nav-link :href="route('admin.slide.index')" :active="request()->routeIs('admin.slide.index')">
                 <svg class="w-4 h-4 me-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                     {{ __('Slide') }}
             </x-nav-link>
 
-            <x-nav-link :href="route('admin.project')" :active="request()->routeIs('admin.project')">
+            <x-nav-link :href="route('admin.project.index')" :active="request()->routeIs('admin.project.index')">
                 <svg class="w-4 h-4 me-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
                     {{ __('Project') }}
             </x-nav-link>
 
-            <x-nav-link :href="route('admin.about')" :active="request()->routeIs('admin.about')">
+            <x-nav-link :href="route('admin.about.index')" :active="request()->routeIs('admin.about.index')">
                 <svg class="w-4 h-4 me-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
                     {{ __('About') }}
             </x-nav-link>
 
-            <x-nav-link :href="route('admin.contact')" :active="request()->routeIs('admin.contact')">
+            <x-nav-link :href="route('admin.contact.index')" :active="request()->routeIs('admin.contact.index')">
                 <svg class="w-4 h-4 me-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                     {{ __('Contact') }}
             </x-nav-link>
 
-            <x-nav-link :href="route('admin.message')" :active="request()->routeIs('admin.message')">
+            <x-nav-link :href="route('admin.message.index')" :active="request()->routeIs('admin.message.index')">
                 <svg class="w-4 h-4 me-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                     {{ __('Message') }}
             </x-nav-link>

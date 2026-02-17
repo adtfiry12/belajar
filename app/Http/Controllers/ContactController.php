@@ -21,7 +21,7 @@ class ContactController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.contacts.create');
     }
 
     /**
@@ -29,7 +29,19 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'desc' => 'required',
+            'maps_link' => 'nullable'
+        ]);
+
+        Contact::create([
+            'title' => $request->title,
+            'desc' => $request->desc,
+            'maps_link' => $request->maps_link
+        ]);
+
+        return redirect()->route('admin.contact.index')->with('success', 'Berhasil Menambah Data Contact');
     }
 
     /**
@@ -45,7 +57,8 @@ class ContactController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $contact = Contact::find($id);
+        return view('backend.contacts.edit', compact('contact'));
     }
 
     /**
@@ -61,6 +74,8 @@ class ContactController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $contact = Contact::find($id);
+        $contact->delete();
+        return redirect()->route('admin.contact.index')->with('success', 'berhasil Menghapus data');
     }
 }

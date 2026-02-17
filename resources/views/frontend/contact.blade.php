@@ -1,7 +1,5 @@
 @extends('frontend.layout')
-@section('title')
-    Contact
-@endsection
+@section('title', 'About')
 @section('content')
     <section class="w-full bg-gray-50 py-16 px-6">
     <div class="max-w-6xl mx-auto">

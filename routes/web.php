@@ -28,35 +28,19 @@ Route::get('contact', [
 // route admin 
 Route::middleware(['auth', 'verified'])->group(function () {
     
-    // Dashboard
-    Route::get('/admin', [
-        BackEndController::class, 'index'
-    ])->name('dashboard');
 
-    // Crud slide
-    Route::get('/admin/slide', [
-        SlideController::class, 'index'
-    ])->name('admin.slide');
+    Route::prefix('admin')->name('admin.')->group(function(){
+        Route::get('/', [
+            BackEndController::class, 'index'
+        ])->name('dashboard');
 
-    //crud project
-    Route::get('admin/project', [
-        ProjectController::class, 'index'
-    ])->name('admin.project');
-
-    // crud about
-    Route::get('/admin/about', [
-        AboutController::class, 'index'
-    ] )->name('admin.about');
-
-    //crud contact
-    Route::get('/admin/contact', [
-        ContactController::class, 'index'
-    ])->name('admin.contact');
-
-    //crud Message
-    Route::get('/admin/message', [
-        MessageController::class, 'index'
-    ])->name('admin.message');
+        // crud
+        Route::resource('slide', SlideController::class);
+        Route::resource('project', ProjectController::class);
+        Route::resource('about', AboutController::class);
+        Route::resource('contact', ContactController::class);
+        Route::resource('message', MessageController::class);
+    });
 
     // profile bawaan breeze
     Route::get('/admin/profile', [

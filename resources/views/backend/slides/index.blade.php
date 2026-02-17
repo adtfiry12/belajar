@@ -5,9 +5,15 @@
             <h2 class="font-black text-xl text-slate-900 uppercase tracking-tight">
                 {{ __('Slide Management') }}
             </h2>
-            <a href="#" class="bg-blue-600 text-white text-[10px] font-black uppercase tracking-widest px-6 py-2 border-2 border-slate-950 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-blue-700 transition-all active:translate-x-0.5 active:translate-y-0.5 active:shadow-none">
-                + Add New Slide
-            </a>
+            @if ($slides->count() < 3)
+                <a href="{{ route('admin.slide.create') }}" class="bg-blue-600 text-white text-[10px] font-black uppercase tracking-widest px-6 py-2 border-2 border-slate-950 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-blue-700 transition-all active:translate-x-0.5 active:translate-y-0.5 active:shadow-none">
+                    + Add New Slide
+                </a>
+            @else
+            <div class="inline-block px-6 py-2 bg-slate-100 border-2 border-slate-300 text-[10px] font-black uppercase tracking-widest text-slate-400 cursor-not-allowed italic">
+                Slot Full (Max 3 Slides)
+            </div>
+            @endif
         </div>
     </x-slot>
 
@@ -43,12 +49,18 @@
                                 </td>
                                 <td class="px-6 py-4 text-right">
                                     <div class="flex justify-end space-x-2">
-                                        <button class="p-2 border-2 border-slate-950 bg-yellow-400 hover:bg-yellow-500 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:shadow-none transition-all">
+                                        <a href="{{ route('admin.slide.edit', $slide->id) }}" class="p-2 border-2 border-slate-950 bg-yellow-400 hover:bg-yellow-500 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:shadow-none transition-all">
                                             <svg class="w-4 h-4 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
-                                        </button>
-                                        <button class="p-2 border-2 border-slate-950 bg-red-500 hover:bg-red-600 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:shadow-none transition-all">
-                                            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
-                                        </button>
+                                        </a>
+                                        <form action="{{ route('admin.slide.destroy', $slide->id) }}" method="POST" onsubmit="return confirm('APAKAH ANDA YAKIN INGIN MENGHAPUS DATA INI?')">
+                                            @csrf
+                                            @method('DELETE') 
+                                            <button type="submit" class="p-2 border-2 border-slate-950 bg-red-600 hover:bg-red-700 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:shadow-none transition-all">
+                                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                                </svg>
+                                            </button>
+                                        </form>
                                     </div>
                                 </td>
                             </tr>

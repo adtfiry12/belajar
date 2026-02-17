@@ -1,0 +1,76 @@
+<x-app-layout>
+    <x-slot name="title">Add New Slide</x-slot>
+
+    <x-slot name="header">
+        <h2 class="font-black text-xl text-slate-900 uppercase tracking-tight">
+            {{ __('Initialize New Slide') }}
+        </h2>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="bg-white border-2 border-slate-950 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-8">
+                
+                <form action="{{ route('admin.slide.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+                    @csrf
+
+                    <div>
+                        <label for="title" class="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-900 mb-2 italic">Slide Title</label>
+                        <input type="text" name="title" id="title" value="{{ old('title') }}"
+                            class="w-full border-2 border-slate-950 rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] focus:ring-0 focus:border-blue-600 font-bold text-sm py-3 px-4 placeholder:text-slate-300 @error('title') border-red-600 shadow-[4px_4px_0px_0px_rgba(220,38,38,1)] @enderror"
+                            placeholder="ENTER SLIDE NAME...">
+                        @error('title')
+                            <p class="mt-4 text-[9px] font-black text-red-600 uppercase tracking-widest italic animate-pulse">! {{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label for="desc" class="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-900 mb-2 italic">Detailed Description</label>
+                        <textarea name="desc" id="desc" rows="4"
+                            class="w-full border-2 border-slate-950 rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] focus:ring-0 focus:border-blue-600 font-bold text-sm py-3 px-4 placeholder:text-slate-300 @error('desc') border-red-600 shadow-[4px_4px_0px_0px_rgba(220,38,38,1)] @enderror"
+                            placeholder="INPUT SLIDE DATA...">{{ old('desc') }}</textarea>
+                        @error('desc')
+                            <p class="mt-4 text-[9px] font-black text-red-600 uppercase tracking-widest italic animate-pulse">! {{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label for="image" class="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-900 mb-2 italic">Visual Asset (Image)</label>
+                        <div class="relative group">
+                            <input type="file" name="image" id="image"
+                                class="w-full border-2 border-dashed @error('image') border-red-600 bg-red-50 @else border-slate-300 @enderror p-8 text-[10px] font-black text-slate-400 uppercase tracking-widest hover:border-blue-600 transition-colors cursor-pointer file:hidden">
+                            <div class="absolute inset-0 flex items-center justify-center pointer-events-none group-hover:text-blue-600 transition-colors">
+                                <span class="uppercase tracking-widest text-[10px] font-black">@error('image') Invalid Format! @else Select Image Asset + @enderror</span>
+                            </div>
+                        </div>
+                        @error('image')
+                            <p class="mt-4 text-[9px] font-black text-red-600 uppercase tracking-widest italic animate-pulse">! {{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div class="pt-4 flex items-center justify-between">
+                        <a href="{{ route('admin.slide.index') }}" class="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-slate-950 transition-colors">
+                            &larr; Abort Mission
+                        </a>
+                        
+                        <button type="submit" 
+                            class="bg-blue-600 text-white text-[11px] font-black uppercase tracking-[0.2em] px-10 py-4 border-2 border-slate-950 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-blue-700 active:translate-x-1 active:translate-y-1 active:shadow-none transition-all">
+                            Execute Deploy
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+            
+            @if ($errors->any())
+                <div class="mt-8 p-4 bg-red-600 border-2 border-slate-950 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+                    <p class="text-[10px] font-black text-white uppercase tracking-widest">
+                        System Alert: Deployment Failed. Please correct the highlighted parameters.
+                    </p>
+                </div>
+            @endif
+
+        </div>
+    </div>
+</x-app-layout>

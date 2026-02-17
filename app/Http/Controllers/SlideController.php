@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Slide;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SlideController extends Controller
 {
@@ -21,7 +22,7 @@ class SlideController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.slides.create');
     }
 
     /**
@@ -29,7 +30,23 @@ class SlideController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'desc'  => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('slides', 'public');
+        }
+
+        Slide::create([
+        'title' => $request->title,
+        'desc'  => $request->desc,
+        'image' => $imagePath,
+        ]);
+
+        return redirect()->route('admin.slide.index')->with('success', 'Slide Berhasil Di-deploy!');
     }
 
     /**
@@ -45,7 +62,8 @@ class SlideController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $slide = Slide::find($id);
+        return view('backend.slides.edit', compact('slide'));
     }
 
     /**
@@ -53,7 +71,23 @@ class SlideController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $slide = Slide::find($id);
+
+        $request->validate([
+        'title' => 'required',
+        'desc'  => 'required',
+        'image' => 'nullable|image|max:2048',
+        ]);
+
+        if ($request->hasFile('image')) {
+            if ($slide->image) {
+            Storage::disk('public')->delete($slide->image);
+            }
+            $data['image'] = $request->file('image')->store('slides', 'public');
+
+            $slide->update($data);
+        }
+        return redirect()->route('admin.slide.index')->with('success', 'Sync Complete!');
     }
 
     /**
@@ -61,6 +95,14 @@ class SlideController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $slide = Slide::find($id);
+
+        if($slide->image){
+            Storage::disk('public')->delete($slide->image);
+        }
+
+        $slide->delete();
+
+        return redirect()->route('admin.slide.index')->with('success', 'DATA BERHASIL DI HAPUS');
     }
 }

@@ -63,8 +63,6 @@
     </div>
 </nav>
 
-<div class="h-20"></div>
-
     <main class="pt-16.5 bg-gray-100 max-w-6xl mx-auto">
         @yield('content')
     </main>
