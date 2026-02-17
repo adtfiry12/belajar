@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\About;
+use App\Models\Contact;
 use App\Models\Project;
 use App\Models\Slide;
 use Illuminate\Http\Request;
@@ -13,7 +14,13 @@ class FrontEndController extends Controller
         $slides = Slide::get();
         $projects = Project::get();
         $about = About::first();
-        return view('frontend.dashboard', compact('slides', 'projects', 'about'));
+        $contact = Contact::first();
+        return view('frontend.dashboard', compact(
+            'slides',
+            'projects',
+            'about',
+            'contact'
+        ));
     }
 
     public function project(){
@@ -27,6 +34,8 @@ class FrontEndController extends Controller
     }
 
     public function contact(){
-        return view('frontend.contact');
+        $contact = Contact::first();
+        $about = About::first();
+        return view('frontend.contact', compact('about', 'contact'));
     }
 }

@@ -41,6 +41,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource('contact', ContactController::class);
         Route::resource('message', MessageController::class);
     });
+    // khusus setelah run
+    Route::post('/message/store', [MessageController::class, 'store'])->middleware('throttle:1,5')->name('admin.message.store');
 
     // profile bawaan breeze
     Route::get('/admin/profile', [

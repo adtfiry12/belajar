@@ -3,7 +3,7 @@
 
     <x-slot name="header">
         <h2 class="font-black text-xl text-slate-900 uppercase tracking-tight">
-            {{ __('EDit Contact') }}
+            {{ __('Edit Contact') }}
         </h2>
     </x-slot>
 
@@ -14,7 +14,7 @@
                 
                 <form action="{{ route('admin.contact.update', $contact->id) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                     @csrf
-
+                    @method('PUT')
                     <div>
                         <label for="title" class="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-900 mb-2 italic">Contact Title</label>
                         <input type="text" name="title" id="title" value="{{ old('title', $contact->title) }}"

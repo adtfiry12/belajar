@@ -52,7 +52,7 @@
                                     </td>
 
                                     <td class="px-6 py-6 align-top text-right">
-                                        <form action="{{ route('messages.destroy', $msg->id) }}" method="POST" onsubmit="return confirm('Execute permanent deletion?')">
+                                        <form action="{{ route('admin.message.destroy', $msg->id) }}" method="POST" onsubmit="return confirm('Execute permanent deletion?')">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="p-3 border-2 border-slate-950 bg-red-600 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-red-700 transition-all active:shadow-none active:translate-x-1 active:translate-y-1">

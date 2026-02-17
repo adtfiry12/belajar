@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Prunable;
 
 class Message extends Model
 {
@@ -14,4 +15,11 @@ class Message extends Model
         'message',
         'ip_address'
     ];
+
+    use Prunable;
+
+    public function prunable()
+    {
+        return static::where('created_at', '<=', now()->subDays(7));
+    }
 }

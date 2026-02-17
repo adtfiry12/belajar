@@ -29,7 +29,22 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'    => 'required|string|max:255',
+            'email'   => 'required|email|max:255',
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string|max:2000'
+        ]);
+
+        Message::create([
+            'name'       => $request->name,
+            'email'      => $request->email,
+            'subject'    => $request->subject,
+            'message'    => $request->message,
+            'ip_address' => $request->ip(),
+        ]);
+
+        return redirect()->back()->with('success', 'Registry Success: Pesan kamu sudah terkirim ke sistem ADTCODE!');
     }
 
     /**
@@ -61,6 +76,8 @@ class MessageController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $message = Message::Find($id);
+        $message->delete();
+        return redirect()->route('admin.message.index')->with('success', 'data berhasil dihapus');
     }
 }

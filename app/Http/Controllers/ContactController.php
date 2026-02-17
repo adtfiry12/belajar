@@ -66,7 +66,21 @@ class ContactController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $contact = Contact::find($id);
+
+        $request->validate([
+            'title' => 'required',
+            'desc' => 'required',
+            'maps_link' => 'nullable'
+        ]);
+
+        $contact->update([
+            'title' => $request->title,
+            'desc' => $request->desc,
+            'maps_link' => $request->maps_link
+        ]);
+
+        return redirect()->route('admin.contact.index')->with('success', 'Berhasil Menambah Data Contact');
     }
 
     /**

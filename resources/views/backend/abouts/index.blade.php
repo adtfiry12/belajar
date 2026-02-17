@@ -20,7 +20,7 @@
             @forelse ($abouts as $about)
             <div class="bg-white border-2 border-slate-950 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-8">
                 <div class="flex flex-col md:flex-row gap-8">
-                    <div class="flex-shrink-0">
+                    <div class="shrink-0">
                         <div class="w-48 h-48 bg-slate-100 border-4 border-slate-950 shadow-[6px_6px_0px_0px_rgba(37,99,235,1)] overflow-hidden">
                             @if($about->photo)
                                 <img src="{{ asset('storage/' . $about->photo) }}" class="w-full h-full object-cover">
