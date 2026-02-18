@@ -24,6 +24,8 @@ Route::get('about',[
 Route::get('contact', [
     FrontEndController::class, 'contact'
 ])->name('contact');
+Route::view('/privacy-policy', 'frontend.privacy')->name('privacy');
+Route::view('/terms-of-service', 'frontend.terms')->name('terms');
 
 // route admin 
 Route::middleware(['auth', 'verified'])->group(function () {
